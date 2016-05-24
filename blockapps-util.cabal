@@ -25,6 +25,7 @@ library
                      , cryptohash
                      , ethereum-rlp
                      , fast-logger
+                     , filepath
                      , global-lock
                      , haskoin
                      , monad-logger
