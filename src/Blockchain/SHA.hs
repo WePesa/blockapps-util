@@ -17,6 +17,8 @@ import qualified Data.Text as T
 import Numeric
 import Web.PathPieces
 
+import Servant.Common.Text
+
 import qualified Blockchain.Colors as CL
 import Blockchain.Data.RLP
 import Blockchain.ExtWord
@@ -47,6 +49,11 @@ instance RLPSerializable SHA where
 
 instance JSON.FromJSON SHA where
 instance JSON.ToJSON SHA where
+
+-- for strato-api-client
+
+instance ToText SHA where
+  toText (SHA val) = T.pack $ showHex (fromIntegral $ val :: Integer) ""
 
 -- I think we want this first definition, but the API already uses the second one!
 -- Someday we should fix this, but it will probably change our external (API) behavior.
