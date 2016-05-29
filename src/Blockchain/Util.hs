@@ -32,6 +32,9 @@ byteString2NibbleString = N.EvenNibbleString
 byteString2Integer::B.ByteString->Integer
 byteString2Integer x = bytes2Integer $ B.unpack x
 
+integer2ByteString::Integer->B.ByteString
+integer2ByteString x = B.pack $ integer2Bytes x
+
 bytes2Integer::[Word8]->Integer
 bytes2Integer [] = 0
 bytes2Integer (byte:rest) = fromIntegral byte `shift` (8 * length rest) + bytes2Integer rest
