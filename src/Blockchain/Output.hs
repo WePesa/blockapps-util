@@ -3,7 +3,6 @@ module Blockchain.Output where
 
 import Control.Monad.Logger
 import qualified Data.ByteString.Char8 as BC
-import System.FilePath
 import System.GlobalLock
 import System.Log.FastLogger
 
