@@ -11,3 +11,8 @@ printLogMsg::Loc->LogSource->LogLevel->LogStr->IO ()
 printLogMsg _ _ _ msg = do
   lock $ putStrLn $ BC.unpack $ fromLogStr msg
 
+printToFile::FilePath->Loc->LogSource->LogLevel->LogStr->IO ()
+--printLogMsg loc logSource level msg = do
+printToFile path _ _ _ msg = do
+  lock $ appendFile path $ BC.unpack (fromLogStr msg) ++ "\n"
+
