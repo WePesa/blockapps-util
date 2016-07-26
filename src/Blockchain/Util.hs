@@ -83,7 +83,7 @@ showMem' p (v01:v02:v03:v04:v05:v06:v07:v08:v09:v10:v11:v12:v13:v14:v15:v16:v17:
 	padZeros 2 (showHex v29 "") ++ padZeros 2 (showHex v30 "") ++ padZeros 2 (showHex v31 "") ++ padZeros 2 (showHex v32 "") 
 	)
             : (showMem' (p+32) rest)
-showMem' p x = [intercalate "" (padZeros 2 <$> flip showHex "" <$> x)]
+showMem' p x = [concat (padZeros 2 <$> flip showHex "" <$> x)]
 
 safeTake::Word256->B.ByteString->B.ByteString
 safeTake i _ | i > 0x7fffffffffffffff = error "error in call to safeTake: string too long"
