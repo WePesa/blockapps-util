@@ -72,7 +72,7 @@ showMem p x = padZeros 4 (showHex p "") ++ " " ++ (showWord8 <$> x) ++ " " ++ in
 showMem'::Int->[Word8]->[String]
 showMem' _ [] = []
 showMem' p (v01:v02:v03:v04:v05:v06:v07:v08:v09:v10:v11:v12:v13:v14:v15:v16:v17:v18:v19:v20:v21:v22:v23:v24:v25:v26:v27:v28:v29:v30:v31:v32:rest) =
-	[] : (
+	(
 	padZeros 2 (showHex v01 "") ++ padZeros 2 (showHex v02 "") ++ padZeros 2 (showHex v03 "") ++ padZeros 2 (showHex v04 "") ++
 	padZeros 2 (showHex v05 "") ++ padZeros 2 (showHex v06 "") ++ padZeros 2 (showHex v07 "") ++ padZeros 2 (showHex v08 "") ++ 
 	padZeros 2 (showHex v09 "") ++ padZeros 2 (showHex v10 "") ++ padZeros 2 (showHex v11 "") ++ padZeros 2 (showHex v12 "") ++
