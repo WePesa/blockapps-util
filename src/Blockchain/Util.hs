@@ -69,6 +69,16 @@ showMem p (v1:v2:v3:v4:v5:v6:v7:v8:rest) =
              ++ showMem (p+8) rest
 showMem p x = padZeros 4 (showHex p "") ++ " " ++ (showWord8 <$> x) ++ " " ++ intercalate " " (padZeros 2 <$> flip showHex "" <$> x)
 
+showMem'::Int->[Word8]->[String]
+showMem' _ [] = [""]
+showMem' p (v1:v2:v3:v4:v5:v6:v7:v8:v9:v10:v11:v12:v13:v14:v15:v16:rest) =
+	[] :
+	(padZeros 2 (showHex v1 "") ++ padZeros 2 (showHex v2 "") ++ padZeros 2 (showHex v3 "") ++ padZeros 2 (showHex v4 "") ++
+	padZeros 2 (showHex v5 "") ++ padZeros 2 (showHex v6 "") ++ padZeros 2 (showHex v7 "") ++ padZeros 2 (showHex v8 "") ++ 
+	padZeros 2 (showHex v9  "") ++ padZeros 2 (showHex v10 "") ++ padZeros 2 (showHex v11 "") ++ padZeros 2 (showHex v12 "") ++
+	padZeros 2 (showHex v13 "") ++ padZeros 2 (showHex v14 "") ++ padZeros 2 (showHex v15 "") ++ padZeros 2 (showHex v16 "") )
+            : (showMem' (p+16) rest)
+showMem' p x = [intercalate "" (padZeros 2 <$> flip showHex "" <$> x)]
 
 safeTake::Word256->B.ByteString->B.ByteString
 safeTake i _ | i > 0x7fffffffffffffff = error "error in call to safeTake: string too long"
