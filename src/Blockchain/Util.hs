@@ -70,14 +70,19 @@ showMem p (v1:v2:v3:v4:v5:v6:v7:v8:rest) =
 showMem p x = padZeros 4 (showHex p "") ++ " " ++ (showWord8 <$> x) ++ " " ++ intercalate " " (padZeros 2 <$> flip showHex "" <$> x)
 
 showMem'::Int->[Word8]->[String]
-showMem' _ [] = [""]
-showMem' p (v1:v2:v3:v4:v5:v6:v7:v8:v9:v10:v11:v12:v13:v14:v15:v16:rest) =
-	[] :
-	(padZeros 2 (showHex v1 "") ++ padZeros 2 (showHex v2 "") ++ padZeros 2 (showHex v3 "") ++ padZeros 2 (showHex v4 "") ++
-	padZeros 2 (showHex v5 "") ++ padZeros 2 (showHex v6 "") ++ padZeros 2 (showHex v7 "") ++ padZeros 2 (showHex v8 "") ++ 
-	padZeros 2 (showHex v9  "") ++ padZeros 2 (showHex v10 "") ++ padZeros 2 (showHex v11 "") ++ padZeros 2 (showHex v12 "") ++
-	padZeros 2 (showHex v13 "") ++ padZeros 2 (showHex v14 "") ++ padZeros 2 (showHex v15 "") ++ padZeros 2 (showHex v16 "") )
-            : (showMem' (p+16) rest)
+showMem' _ [] = []
+showMem' p (v01:v02:v03:v04:v05:v06:v07:v08:v09:v10:v11:v12:v13:v14:v15:v16:v17:v18:v19:v20:v21:v22:v23:v24:v25:v26:v27:v28:v29:v30:v31:v32:rest) =
+	[] : (
+	padZeros 2 (showHex v01 "") ++ padZeros 2 (showHex v02 "") ++ padZeros 2 (showHex v03 "") ++ padZeros 2 (showHex v04 "") ++
+	padZeros 2 (showHex v05 "") ++ padZeros 2 (showHex v06 "") ++ padZeros 2 (showHex v07 "") ++ padZeros 2 (showHex v08 "") ++ 
+	padZeros 2 (showHex v09 "") ++ padZeros 2 (showHex v10 "") ++ padZeros 2 (showHex v11 "") ++ padZeros 2 (showHex v12 "") ++
+	padZeros 2 (showHex v13 "") ++ padZeros 2 (showHex v14 "") ++ padZeros 2 (showHex v15 "") ++ padZeros 2 (showHex v16 "") ++
+	padZeros 2 (showHex v17 "") ++ padZeros 2 (showHex v18 "") ++ padZeros 2 (showHex v19 "") ++ padZeros 2 (showHex v20 "") ++
+	padZeros 2 (showHex v21 "") ++ padZeros 2 (showHex v22 "") ++ padZeros 2 (showHex v23 "") ++ padZeros 2 (showHex v24 "") ++ 
+	padZeros 2 (showHex v25 "") ++ padZeros 2 (showHex v26 "") ++ padZeros 2 (showHex v27 "") ++ padZeros 2 (showHex v28 "") ++
+	padZeros 2 (showHex v29 "") ++ padZeros 2 (showHex v30 "") ++ padZeros 2 (showHex v31 "") ++ padZeros 2 (showHex v32 "") 
+	)
+            : (showMem' (p+32) rest)
 showMem' p x = [intercalate "" (padZeros 2 <$> flip showHex "" <$> x)]
 
 safeTake::Word256->B.ByteString->B.ByteString
