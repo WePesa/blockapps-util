@@ -7,6 +7,7 @@ module Blockchain.Format (
 import qualified Data.ByteString as B
 import qualified Data.ByteString.Char8 as BC
 import qualified Data.ByteString.Base16 as B16
+import qualified Data.NibbleString as N
 
 import Blockchain.ExtWord
 
@@ -15,6 +16,10 @@ class Format a where
 
 instance Format B.ByteString where
   format x = BC.unpack (B16.encode x)
+
+instance Format N.NibbleString where
+  format (EvenNibbleString bs) = format bs
+  format (OddNibleString n bs) = showHex n "" ++ format bs
 
 instance Format Word256 where
   format x = BC.unpack $ B16.encode $ B.pack $ word256ToBytes x
