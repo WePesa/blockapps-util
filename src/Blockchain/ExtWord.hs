@@ -73,11 +73,9 @@ bytesToWord256 bytes | length bytes == 32 =
 bytesToWord256 _ = error "bytesToWord256 was called with the wrong number of bytes"  
 
 instance RLPSerializable Word256 where
-    rlpEncode val = RLPString $ BL.toStrict $ encode val
+    rlpEncode = rlpEncode . toInteger
+    rlpDecode = fromInteger . rlpDecode
 
-    rlpDecode (RLPString s) | B.null s = 0
-    rlpDecode (RLPString s) | B.length s <= 32 = decode $ BL.fromStrict s
-    rlpDecode x = error ("Missing case in rlp2Word256: " ++ show x)
 
 instance RLPSerializable Word128 where
     rlpEncode val = RLPString $ BL.toStrict $ encode val
