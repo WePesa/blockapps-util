@@ -13,7 +13,9 @@ module Blockchain.ExtWord (
   word160ToBytes,
   bytesToWord160,
   word256ToBytes,
-  bytesToWord256
+  bytesToWord256,
+  word512ToBytes,
+  bytesToWord512
   ) where
 
 import Data.Binary
@@ -71,6 +73,14 @@ bytesToWord256::[Word8]->Word256
 bytesToWord256 bytes | length bytes == 32 =
   sum $ map (\(shiftBits, byte) -> fromIntegral byte `shiftL` shiftBits) $ zip [256-8,256-16..0] bytes
 bytesToWord256 _ = error "bytesToWord256 was called with the wrong number of bytes"  
+
+word512ToBytes::Word512->[Word8]
+word512ToBytes word = map (fromIntegral . (word `shiftR`)) [512-8, 512-16..0]
+
+bytesToWord512::[Word8]->Word512
+bytesToWord512 bytes | length bytes == 64 =
+  sum $ map (\(shiftBits, byte) -> fromIntegral byte `shiftL` shiftBits) $ zip [512-8,512-16..0] bytes
+bytesToWord512 _ = error "bytesToWord256 was called with the wrong number of bytes"  
 
 instance RLPSerializable Word256 where
     rlpEncode = rlpEncode . toInteger
