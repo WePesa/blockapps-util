@@ -2,6 +2,7 @@
 
 module Blockchain.SHA (
   SHA(..),
+  formatSHAWithoutColor,
   hash
   ) where
 
@@ -27,9 +28,13 @@ import GHC.Generics
 
 newtype SHA = SHA Word256 deriving (Show, Eq, Ord, Read, Generic)
 
+formatSHAWithoutColor :: SHA -> String
+formatSHAWithoutColor s@(SHA x)  
+  | s == hash "" = "<blank>"
+  | otherwise    = padZeros 64 $ showHex x ""
+
 instance Format SHA where
-  format x | x == hash "" = CL.yellow "<blank>"
-  format (SHA x) = CL.yellow $ padZeros 64 $ showHex x ""
+  format = CL.yellow . formatSHAWithoutColor
 
 instance Binary SHA where
   put (SHA x) = sequence_ $ fmap put $ word256ToBytes $ fromIntegral x
