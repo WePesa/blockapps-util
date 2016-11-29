@@ -1,4 +1,4 @@
-{-# LANGUAGE DeriveGeneric, OverloadedStrings #-}
+{-# LANGUAGE DeriveGeneric, DefaultSignatures, OverloadedStrings #-}
 
 module Blockchain.SHA (
   SHA(..),
